@@ -1,6 +1,8 @@
 package ru.imatveev.application.command;
 
+import ru.imatveev.application.ArrayType;
 import ru.imatveev.application.Context;
+import ru.imatveev.application.CustomException;
 
 public class CommandClear extends AbstractCommand {
     String userCommand = "clear";
