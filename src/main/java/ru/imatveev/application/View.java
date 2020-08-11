@@ -33,7 +33,7 @@ public class View {
 
     private void handle(CustomException e) {
         System.err.println(e.getMessage());
-        System.err.println("please write right command or print 'help'");
+        System.err.println("please write correct command or print 'help'");
     }
 
     private void filterCommandsAndExecute(String userCommand) {
