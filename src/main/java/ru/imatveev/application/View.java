@@ -1,11 +1,14 @@
 package ru.imatveev.application;
 
-import ru.imatveev.application.command.*;
+import ru.imatveev.application.command.AbstractCommand;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <p>created by</p>
+ * <p>Ivan Matveev</p>
+ */
 public class View {
     Context context = new Context();
 
@@ -17,9 +20,9 @@ public class View {
         System.out.println("\t(print 'help' to see all commands)");
     }
 
+    @SuppressWarnings("all")
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-        String userCommand = scanner.nextLine();
+        String userCommand = new Scanner(System.in).nextLine();
         try {
             filterCommandsAndExecute(userCommand);
         } catch (CustomException e) {

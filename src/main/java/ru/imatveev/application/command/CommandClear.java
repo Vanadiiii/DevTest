@@ -2,8 +2,11 @@ package ru.imatveev.application.command;
 
 import ru.imatveev.application.Context;
 
-public class CommandClear extends AbstractCommand {
-    String userCommand = "clear";
+public class CommandClear implements AbstractCommand {
+    @Override
+    public boolean match(String userCommand) {
+        return "clear".equals(userCommand);
+    }
 
     @Override
     public void execute(String argument, Context context) {

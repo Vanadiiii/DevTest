@@ -6,10 +6,11 @@ import ru.imatveev.application.CustomException;
 
 import java.util.Arrays;
 
-import static ru.imatveev.application.ArrayType.*;
-
-public class CommandInit extends AbstractCommand {
-    String userCommand = "init";
+public class CommandInit implements AbstractCommand {
+    @Override
+    public boolean match(String userCommand) {
+        return "init".equals(userCommand);
+    }
 
     @Override
     public void execute(String argument, Context context) {

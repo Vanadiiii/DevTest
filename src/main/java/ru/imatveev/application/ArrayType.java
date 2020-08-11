@@ -5,8 +5,7 @@ import lombok.Getter;
 public enum ArrayType {
     X(3),
     S(5),
-    M(7),
-    D(10);
+    M(7);
 
     @Getter
     int value;

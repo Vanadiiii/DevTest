@@ -22,8 +22,4 @@ public class Context {
                         type -> new int[0]
                 ));
     }
-
-    void changeArray(ArrayType type, int[] values) {
-        arrayMap.put(type, values);
-    }
 }

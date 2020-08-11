@@ -6,8 +6,11 @@ import ru.imatveev.application.CustomException;
 
 import java.util.Arrays;
 
-public class CommandPrint extends AbstractCommand {
-    String userCommand = "print";
+public class CommandPrint implements AbstractCommand {
+    @Override
+    public boolean match(String userCommand) {
+        return "print".equals(userCommand);
+    }
 
     @Override
     public void execute(String argument, Context context) {

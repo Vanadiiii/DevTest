@@ -6,8 +6,11 @@ import ru.imatveev.application.Context;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-public class CommandAnyMore extends AbstractCommand {
-    String userCommand = "anyMore";
+public class CommandAnyMore implements AbstractCommand {
+    @Override
+    public boolean match(String userCommand) {
+        return "anyMore".equals(userCommand);
+    }
 
     @Override
     public void execute(String argument, Context context) {
