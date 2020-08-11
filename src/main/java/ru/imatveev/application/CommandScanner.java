@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * <p>please, print new commands in package <b>ru.imatveev.application.command</b></p>
+ * <p>please, write new commands in package <b>ru.imatveev.application.command</b></p>
  */
 public class CommandScanner {
     List<AbstractCommand> getCommands() {

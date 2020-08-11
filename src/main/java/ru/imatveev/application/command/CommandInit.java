@@ -1,9 +1,12 @@
 package ru.imatveev.application.command;
 
+import ru.imatveev.application.ArrayType;
 import ru.imatveev.application.Context;
 import ru.imatveev.application.CustomException;
 
 import java.util.Arrays;
+
+import static ru.imatveev.application.ArrayType.*;
 
 public class CommandInit extends AbstractCommand {
     String userCommand = "init";
@@ -13,10 +16,10 @@ public class CommandInit extends AbstractCommand {
         if (argument == null) {
             throw new CustomException("initial array can not be null");
         }
-        context.initialArray = parseArray(argument);
-        context.array3 = filterArray(context.initialArray, 3);
-        context.array5 = filterArray(context.initialArray, 5);
-        context.array7 = filterArray(context.initialArray, 7);
+        context.setInitialArray(parseArray(argument));
+        context.getArrayMap()
+                .entrySet()
+                .forEach(entry -> entry.setValue(filterArray(context.getInitialArray(), entry.getKey())));
         System.out.println("all arrays are initialized");
     }
 
@@ -37,9 +40,9 @@ public class CommandInit extends AbstractCommand {
         }
     }
 
-    private int[] filterArray(int[] initialArray, int type) {
+    private int[] filterArray(int[] initialArray, ArrayType type) {
         return Arrays.stream(initialArray)
-                .filter(it -> it % type == 0)
+                .filter(it -> it % type.getValue() == 0)
                 .sorted()
                 .toArray();
     }

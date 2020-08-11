@@ -7,9 +7,9 @@ public class CommandClear extends AbstractCommand {
 
     @Override
     public void execute(String argument, Context context) {
-        context.array3 = new int[0];
-        context.array5 = new int[0];
-        context.array7 = new int[0];
+        context.getArrayMap()
+                .entrySet()
+                .forEach(entry -> entry.setValue(new int[0]));
         System.out.println("all arrays are cleared");
     }
 }

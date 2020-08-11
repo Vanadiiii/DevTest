@@ -44,10 +44,10 @@ public class View {
     }
 
     private String parseCommand(String userCommand) {
-        return userCommand.split(" ")[0];
+        return userCommand.replaceAll("(^\\w+)(\\s*)(.*$)", "$1");
     }
 
     private String parseArgument(String userCommand) {
-        return userCommand.replaceAll("^\\w+\\s+", "");
+        return userCommand.replaceAll("(^\\w+)(\\s*)(.*$)", "$3");
     }
 }

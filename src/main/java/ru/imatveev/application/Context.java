@@ -1,9 +1,29 @@
 package ru.imatveev.application;
 
-public class Context {
-    public int[] initialArray = new int[0];
+import lombok.Getter;
+import lombok.Setter;
 
-    public int[] array3 = new int[0];
-    public int[] array5 = new int[0];
-    public int[] array7 = new int[0];
+import java.util.EnumSet;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Getter
+@Setter
+public class Context {
+    int[] initialArray = new int[0];
+
+    Map<ArrayType, int[]> arrayMap;
+
+    {
+        arrayMap = EnumSet.allOf(ArrayType.class)
+                .stream()
+                .collect(Collectors.toMap(
+                        type -> type,
+                        type -> new int[0]
+                ));
+    }
+
+    void changeArray(ArrayType type, int[] values) {
+        arrayMap.put(type, values);
+    }
 }
