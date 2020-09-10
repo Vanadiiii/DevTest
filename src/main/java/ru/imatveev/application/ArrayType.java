@@ -5,8 +5,8 @@ import ru.imatveev.application.exceptions.IllegalArrayTypeException;
 
 public enum ArrayType {
     X(3),
-    S(5),
-    M(7);
+    S(7),
+    M(21);
 
     @Getter
     int value;

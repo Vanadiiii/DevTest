@@ -1,8 +1,10 @@
 package ru.imatveev.application.command;
 
+import ru.imatveev.application.ArrayType;
 import ru.imatveev.application.Context;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 
 public class CommandMerge implements ICommand {
     private final String COMMAND = "merge";
@@ -14,10 +16,13 @@ public class CommandMerge implements ICommand {
 
     @Override
     public void execute(String argument, Context context) {
-        int[] mergedArray = context.getArrayMap()
-                .values()
-                .stream()
-                .flatMapToInt(Arrays::stream)
+        int[] mergedArray = Arrays.stream(context.getInitialArray())
+                .filter(value ->
+                        EnumSet.allOf(ArrayType.class)
+                                .stream()
+                                .map(ArrayType::getValue)
+                                .anyMatch(enumValue -> value % enumValue == 0)
+                )
                 .sorted()
                 .toArray();
         System.out.println("merged array is " + ((mergedArray.length != 0) ? Arrays.toString(mergedArray) : "empty"));
