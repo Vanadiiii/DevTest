@@ -4,10 +4,12 @@ import ru.imatveev.application.Context;
 
 import java.util.Arrays;
 
-public class CommandMerge implements AbstractCommand {
+public class CommandMerge implements ICommand {
+    private final String COMMAND = "merge";
+
     @Override
     public boolean match(String userCommand) {
-        return "merge".equals(userCommand);
+        return COMMAND.equals(userCommand);
     }
 
     @Override

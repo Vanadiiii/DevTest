@@ -2,10 +2,12 @@ package ru.imatveev.application.command;
 
 import ru.imatveev.application.Context;
 
-public class CommandHelp implements AbstractCommand {
+public class CommandHelp implements ICommand {
+    private final String COMMAND = "help";
+
     @Override
     public boolean match(String userCommand) {
-        return "help".equals(userCommand);
+        return COMMAND.equals(userCommand);
     }
 
     @Override

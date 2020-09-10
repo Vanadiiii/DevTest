@@ -1,6 +1,8 @@
 package ru.imatveev.application;
 
-import ru.imatveev.application.command.AbstractCommand;
+import ru.imatveev.application.command.ICommand;
+import ru.imatveev.application.exceptions.ConsoleAppException;
+import ru.imatveev.application.exceptions.IllegalCommandNameException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +14,7 @@ import java.util.Scanner;
 public class View {
     Context context = new Context();
 
-    List<AbstractCommand> abstractCommandList = new CommandScanner().getCommands();
+    List<ICommand> iCommandList = new CommandScanner().getCommands();
 
     static {
         System.out.println("Welcome to the my app");
@@ -25,13 +27,13 @@ public class View {
         String userCommand = new Scanner(System.in).nextLine();
         try {
             filterCommandsAndExecute(userCommand);
-        } catch (CustomException e) {
+        } catch (ConsoleAppException e) {
             handle(e);
         }
         start();
     }
 
-    private void handle(CustomException e) {
+    private void handle(ConsoleAppException e) {
         System.err.println(e.getMessage());
         System.err.println("please write correct command or print 'help'");
     }
@@ -39,10 +41,10 @@ public class View {
     private void filterCommandsAndExecute(String userCommand) {
         String command = parseCommand(userCommand);
         String argument = parseArgument(userCommand);
-        abstractCommandList.stream()
+        iCommandList.stream()
                 .filter(abstractCommand -> abstractCommand.match(command))
                 .findFirst()
-                .orElseThrow(() -> new CustomException("unknown command - '" + userCommand + "'"))
+                .orElseThrow(() -> new IllegalCommandNameException("unknown command - '" + userCommand + "'"))
                 .execute(argument, context);
     }
 

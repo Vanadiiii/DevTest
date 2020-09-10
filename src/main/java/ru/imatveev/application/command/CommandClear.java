@@ -2,34 +2,22 @@ package ru.imatveev.application.command;
 
 import ru.imatveev.application.ArrayType;
 import ru.imatveev.application.Context;
-import ru.imatveev.application.CustomException;
 
-public class CommandClear implements AbstractCommand {
+public class CommandClear implements ICommand {
+    private final String COMMAND = "clear";
+
     @Override
     public boolean match(String userCommand) {
-        return "clear".equals(userCommand);
+        return COMMAND.equals(userCommand);
     }
 
     @Override
     public void execute(String argument, Context context) {
-        if (argument.isBlank()) {
-            context.getArrayMap()
-                    .entrySet()
-                    .forEach(entry -> entry.setValue(new int[0]));
-            System.out.println("all arrays were cleared");
-        } else {
-            ArrayType type;
-            try {
-                type = ArrayType.valueOf(argument.toUpperCase());
-            } catch (IllegalArgumentException e) {
-                throw new CustomException("unknown type of array - '" + argument + "'");
-            }
-            context.getArrayMap()
-                    .entrySet()
-                    .stream()
-                    .filter(entry -> type.equals(entry.getKey()))
-                    .forEach(entry -> entry.setValue(new int[0]));
-            System.out.println("array" + type.name() + " was cleared");
-        }
+        context.getArrayMap()
+                .entrySet()
+                .stream()
+                .filter(entry -> argument.isBlank() || ArrayType.getByName(argument).equals(entry.getKey()))
+                .peek(entry -> System.out.println("array" + entry.getKey().name() + " was cleared"))
+                .forEach(entry -> entry.setValue(new int[0]));
     }
 }
